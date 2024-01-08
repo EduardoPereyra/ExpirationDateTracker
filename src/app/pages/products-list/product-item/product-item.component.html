@@ -1,0 +1,27 @@
+<ion-item-sliding class="scale-up-bottom">
+  <ion-item-options side="start">
+        <ion-item-option (click)="edit()">
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
+        </ion-item-option>
+  </ion-item-options>
+  <ion-item lines="none">
+    <ion-card mode="ios" (click)="edit()">
+      <ion-header>
+        <img [src]="product.icon !== ''? product.icon: './assets/images/food.png'" alt="">
+        <div>
+          <ion-card-title>{{product.name}}</ion-card-title>
+          <ion-card-subtitle [color]="expired? 'danger': ''">
+            {{product.date | date: 'dd MMM yyyy'}}</ion-card-subtitle>
+        </div>
+      </ion-header>
+    <!--  <ion-content>
+
+      </ion-content>-->
+    </ion-card>
+  </ion-item>
+  <ion-item-options side="end">
+    <ion-item-option color="danger" (click)="delete()">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

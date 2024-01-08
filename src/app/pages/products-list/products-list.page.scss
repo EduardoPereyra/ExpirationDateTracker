@@ -1,0 +1,13 @@
+ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ion-list {
+    margin-top: 10px;
+  }
+
+  .add-new-product-container {
+    margin: 20px 10px;
+  }
+}

@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true" class="slide-top">
+<!--  <div class="add-new-product-container" *ngIf="!scanningBarcode; else scanningBarcodeTemplate">-->
+  <div class="add-new-product-container">
+    <ion-card mode="ios">
+      <ion-header>
+        <img [src]="product.icon !== ''? product.icon: './assets/images/food.png'"
+             alt="" (click)="showingIcons = true;">
+        <div>
+          <ion-item mode="md" class="name-input-item">
+            <ion-label position="floating">Product name</ion-label>
+            <ion-input placeholder="Enter name" [(ngModel)]="product.name" type="text" inputmode="text"
+              autocapitalize="on" autocorrect="on" maxlength="30" minlength="3"
+              name="Name" required="true" spellcheck="true"></ion-input>
+<!--            <ion-note slot="error">Invalid name</ion-note>-->
+          </ion-item>
+          <ion-item mode="md" lines="none">
+            <ion-label>Expiration date</ion-label>
+            <ion-toggle [enableOnOffLabels]="true" slot="end" [(ngModel)]="product.expirationDate"></ion-toggle>
+          </ion-item>
+          <ion-item mode="ios" lines="none">
+            <ion-datetime-button datetime="datetime" color="primary"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime" presentation="date" [showDefaultButtons]="true"
+                              [(ngModel)]="product.date" color="primary"
+                              [max]="maxYearDate">
+                            <span slot="title" *ngIf="product.expirationDate; else purchaseDate">Select a Expiration Date</span>
+                  <ng-template #purchaseDate>
+                            <span slot="title">Select a Purchase Date</span>
+                  </ng-template>
+                </ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+        </div>
+      </ion-header>
+    </ion-card>
+    <ion-button color="primary" (click)="editProduct()" *ngIf="editing; else creating" [disabled]="product.name === ''">Save</ion-button>
+    <ng-template #creating>
+<!--      <ion-button fill="clear" (click)="scanningBarcode = true"><img alt="barcode" src="./assets/images/barcode.png"></ion-button>-->
+      <ion-button color="primary" (click)="createProduct()" [disabled]="product.name === ''">Add Product</ion-button>
+    </ng-template>
+    <ion-button fill="outline" color="primary" (click)="cancel()">Cancel</ion-button>
+  </div>
+<!--  <ng-template #scanningBarcodeTemplate>
+    <div>
+      <app-barcode-scanner (barcodeEvent)="scanBarcode($event)"></app-barcode-scanner>
+    </div>
+  </ng-template>-->
+</ion-content>
+
+<div class="icons-container" *ngIf="showingIcons">
+  <ng-container *ngFor="let icon of icons">
+    <img [src]="icon" alt="" (click)="changeIcon(icon)">
+  </ng-container>
+</div>

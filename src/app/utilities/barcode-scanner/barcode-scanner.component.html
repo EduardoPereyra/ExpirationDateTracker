@@ -1,0 +1,8 @@
+<barcode-scanner-livestream
+  type="ean"
+  (valueChanges)="onValueChanges($event)"
+  (started)="(onStarted('starded'))"
+></barcode-scanner-livestream>
+
+<ion-button fill="clear" (click)="restart()"><ion-icon slot="icon-only" name="refresh"></ion-icon></ion-button>
+<p>{{barCode}}</p>

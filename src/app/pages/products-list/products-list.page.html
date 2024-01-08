@@ -1,0 +1,20 @@
+<app-header [title]="'Product List'"></app-header>
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="!creatingProduct; else createProductTemplate">
+    <ion-list *ngIf="productList.length > 0" mode="ios" [@productList]="productList.length">
+      <ng-container *ngFor="let product of productList; let index = index;">
+        <app-product-item [product]="product" (editEmitter)="editProduct($event, index)"
+                          (deleteEmitter)="deleteProduct($event, index)"></app-product-item>
+      </ng-container>
+    </ion-list>
+    <div class="add-new-product-container">
+      <ion-button color="primary" expand="block" (click)="creatingProduct = true">New Product</ion-button>
+    </div>
+  </ng-container>
+  <ng-template #createProductTemplate>
+    <app-product-item-edit [product]="newProduct" (createNewProduct)="createProduct($event)"
+                           (editExistingProduct)="saveProduct($event)"
+                           [editing]="editing"></app-product-item-edit>
+  </ng-template>
+</ion-content>
+

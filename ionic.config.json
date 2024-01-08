@@ -1,0 +1,7 @@
+{
+  "name": "ExpirationDateTracking",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
